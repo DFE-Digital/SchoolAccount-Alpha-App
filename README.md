@@ -1,2 +1,2 @@
-# SchoolAccount-Alpha
+# SchoolAccount-Alpha-App
 School Account Account Web app
