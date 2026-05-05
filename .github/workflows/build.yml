@@ -1,0 +1,94 @@
+name: Docker Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine version and tags
+        id: meta
+        shell: pwsh
+        run: |
+          ./build/build.ps1 `
+            -Command DetermineMetadata `
+            -GitRef "${{ github.ref }}" `
+            -GitRefName "${{ github.ref_name }}" `
+            -GitSha "${{ github.sha }}" `
+            -PullRequestNumber "${{ github.event.pull_request.number }}"
+
+      - name: Print bake file configuration
+        shell: pwsh
+        run: |
+          ./build/build.ps1 `
+            -Command PrintConfig `
+            -Target webapi-ci `
+            -Registry "${{ env.REGISTRY }}" `
+            -ImageName "${{ env.IMAGE_NAME }}" `
+            -Tag "${{ steps.meta.outputs.tag }}" `
+            -Version "${{ steps.meta.outputs.version }}" `
+            -Push
+
+      - name: Build and push with Docker Buildx Bake
+        shell: pwsh
+        run: |
+          ./build/build.ps1 `
+            -Command Build `
+            -Target webapi-ci `
+            -Registry "${{ env.REGISTRY }}" `
+            -ImageName "${{ env.IMAGE_NAME }}" `
+            -Tag "${{ steps.meta.outputs.tag }}" `
+            -Version "${{ steps.meta.outputs.version }}" `
+            -GitSha "${{ github.sha }}" `
+            -BuildConfiguration Release `
+            -Push
+
+      - name: Tag with commit SHA
+        if: github.ref == 'refs/heads/main'
+        shell: pwsh
+        run: |
+          ./build/build.ps1 `
+            -Command TagImage `
+            -Registry "${{ env.REGISTRY }}" `
+            -ImageName "${{ env.IMAGE_NAME }}" `
+            -Tag "${{ steps.meta.outputs.tag }}" `
+            -AdditionalTag "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}"
+
+      - name: Output build summary
+        shell: pwsh
+        run: |
+          ./build/build.ps1 `
+            -Command ShowSummary `
+            -Registry "${{ env.REGISTRY }}" `
+            -ImageName "${{ env.IMAGE_NAME }}" `
+            -Tag "${{ steps.meta.outputs.tag }}" `
+            -Version "${{ steps.meta.outputs.version }}" `
+            -GitSha "${{ github.sha }}"
