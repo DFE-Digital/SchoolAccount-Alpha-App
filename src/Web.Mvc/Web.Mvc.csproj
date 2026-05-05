@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <!-- Properties are inherited from Directory.Build.props -->
+        <!-- You can override specific properties here if needed -->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Package references without versions (versions come from Directory.Packages.props) -->
+        <!-- Example: -->
+        <!-- <PackageReference Include="PackageName" /> -->
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/build/">
+    <File Path="build/build.ps1" />
+  </Folder>
+  <Folder Name="/solution/">
+    <File Path=".dockerignore" />
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/solution/.github/">
+    <File Path=".github/dependabot.yml" />
+  </Folder>
+  <Folder Name="/solution/.github/workflows/">
+    <File Path=".github/workflows/build.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Web.Mvc/Web.Mvc.csproj" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+</Solution>

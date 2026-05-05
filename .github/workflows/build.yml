@@ -1,0 +1,29 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.2
+
+      - name: Install PowerShell
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y powershell
+
+      - name: Build Docker image
+        shell: pwsh
+        run: |
+          ./build/build.ps1 `
+            -ImageName "schoolaccount-alpha-app" `
+            -Tag "${{ github.sha }}" `
+            -BuildConfiguration "Release"

@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  web:
+    build:
+      context: "C:\\Users\\pcustance\\Code\\SchoolAccount-Alpha-App"
+      dockerfile: "src/Web.Mvc/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net10.0/Web.Mvc.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net10.0/Web.Mvc.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "schoolaccount-alpha-app:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\pcustance\\Code\\SchoolAccount-Alpha-App\\src\\Web.Mvc:/app:rw"
+    - "C:\\Users\\pcustance\\Code\\SchoolAccount-Alpha-App:/src:rw"
+    - "C:\\Users\\pcustance\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"
