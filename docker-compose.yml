@@ -1,9 +1,9 @@
 services:
   web:
-    image: ${DOCKER_REGISTRY-}schoolaccount-alpha-app    
+    image: schoolaccount-alpha-app    
     build:
       context: .
       dockerfile: src/Web.Mvc/Dockerfile
     ports:
-      - 5000:8080
-      - 5001:8081
+      - "5000:8080"
+      - "5001:8081"
