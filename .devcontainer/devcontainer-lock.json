@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/postfinance/devcontainer-features/dotnet:1": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/postfinance/devcontainer-features/dotnet@sha256:22bce48a820093d32fb49f321fd2ab37b18e0b0e68d73b3edd13bcffb9efaf63",
+      "integrity": "sha256:22bce48a820093d32fb49f321fd2ab37b18e0b0e68d73b3edd13bcffb9efaf63"
+    }
+  }
+}
