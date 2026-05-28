@@ -25,9 +25,9 @@ jobs:
       - name: Deploy to ACA
         run: |
           az containerapp create \
-            --name schoolaccount-app \
-            --resource-group s268d01rg-uks-sa-cae \
-            --environment s268d01-aca-sa-cae \
+            --name schoolaccount-alpha-app \
+            --resource-group contapps \
+            --environment contappmra \
             --image ghcr.io/dfe-digital/schoolaccount-alpha-app:${{ github.event.workflow_run.head_branch }} \
             --target-port 8080 \
             --ingress external \
