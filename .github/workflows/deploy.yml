@@ -19,15 +19,13 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
 
-      - name: Deploy to ACA
-        run: |
-          az containerapp create \
-            --name schoolaccount-alpha-app \
-            --resource-group contapps \
-            --environment contappmra \
-            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest \
-            --target-port 8080 \
-            --ingress external \
-            --registry-server ghcr.io \
-            --registry-username ${{ github.actor }} \
-            --registry-password ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: terraform
+        env:
+          TF_VAR_ghcr_username: ${{ github.actor }}
+          TF_VAR_ghcr_token: ${{ secrets.GITHUB_TOKEN }}
