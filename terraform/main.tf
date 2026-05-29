@@ -1,5 +1,5 @@
 resource "azurerm_container_app" "app" {
-  name                         = "schoolaccount-alpha-app"
+  name                         = "schoolaccount-alpha-app-tf"
   resource_group_name          = "contapps"
   container_app_environment_id = data.azurerm_container_app_environment.env.id
   revision_mode                = "Single"
@@ -17,7 +17,7 @@ resource "azurerm_container_app" "app" {
 
   template {
     container {
-      name   = "schoolaccount-alpha-app-tf"
+      name   = "schoolaccount-alpha-app"
       image  = "ghcr.io/dfe-digital/schoolaccount-alpha-app:latest"
       cpu    = 0.25
       memory = "0.5Gi"
