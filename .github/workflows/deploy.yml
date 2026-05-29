@@ -3,7 +3,7 @@ name: Deploy to Azure Container Apps
 on:
   push:
     branches:
-      - feature/add-aca-deployment
+      - feature/add-aca-deployment-tf
 
 
 jobs:
