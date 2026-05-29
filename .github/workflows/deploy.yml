@@ -24,7 +24,4 @@ jobs:
           az containerapp update \
             --name schoolaccount-alpha-app \
             --resource-group contapps \
-            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest \
-            --registry-server ghcr.io \
-            --registry-username ${{ github.actor }} \
-            --registry-password ${{ secrets.GITHUB_TOKEN }}
+            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest
