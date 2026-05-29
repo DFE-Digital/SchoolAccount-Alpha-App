@@ -21,7 +21,7 @@ jobs:
 
       - name: Deploy to ACA
         run: |
-          az containerapp create \
+          az containerapp update \
             --name schoolaccount-alpha-app \
             --resource-group contapps \
             --environment contappmra \
