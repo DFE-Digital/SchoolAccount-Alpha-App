@@ -24,10 +24,7 @@ jobs:
           az containerapp update \
             --name schoolaccount-alpha-app \
             --resource-group contapps \
-            --environment contappmra \
             --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest \
-            --target-port 8080 \
-            --ingress external \
             --registry-server ghcr.io \
             --registry-username ${{ github.actor }} \
             --registry-password ${{ secrets.GITHUB_TOKEN }}
