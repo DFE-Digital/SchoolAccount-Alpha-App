@@ -10,7 +10,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+   # if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Azure Login
@@ -28,7 +28,7 @@ jobs:
             --name schoolaccount-alpha-app \
             --resource-group contapps \
             --environment contappmra \
-            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:${{ github.event.workflow_run.head_branch }} \
+            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest \
             --target-port 8080 \
             --ingress external \
             --registry-server ghcr.io \
