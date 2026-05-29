@@ -1,10 +1,10 @@
 name: Deploy to Azure Container Apps
 
 on:
-  workflow_run:
-    workflows: ["Build"]
-    types:
-      - completed
+  push:
+    branches:
+      - feature/add-aca-deployment
+
 
 jobs:
   deploy:
