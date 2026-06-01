@@ -7,10 +7,8 @@
 	"features": {
 		"ghcr.io/postfinance/devcontainer-features/dotnet:1": {}
 	},
-
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
 	// "portsAttributes": {
@@ -18,13 +16,14 @@
 	//			"protocol": "https"
 	//		}
 	// }
-
+	"initializeCommand": "AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1 az keyvault secret show --name dfe-vpn-root-ca --vault-name s268d01kvs-sa-shared --query value -o tsv > /tmp/root-ca.pem",
+	"mounts": [
+		"source=/tmp/root-ca.pem,target=/usr/local/share/ca-certificates/root-ca.crt,type=bind"
+	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "dotnet restore SchoolAccount.Alpha.App.slnx"
-
+	"postCreateCommand": "sudo update-ca-certificates"
 	// Configure tool-specific properties.
 	// "customizations": {},
-
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 }
