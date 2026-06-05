@@ -21,13 +21,7 @@ jobs:
 
       - name: Deploy to Container Apps Environment
         run: |
-          az containerapp create \
+          az containerapp update \
             --name schoolaccount-alpha-app \
             --resource-group s268d01rg-uks-sa-poc \
-            --environment s268d01ace-sa-poc \
-            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest \
-            --target-port 8080 \
-            --ingress external \
-            --registry-server ghcr.io \
-            --registry-username ${{ github.actor }} \
-            --registry-password ${{ secrets.GITHUB_TOKEN }}
+            --image ghcr.io/dfe-digital/schoolaccount-alpha-app:latest
