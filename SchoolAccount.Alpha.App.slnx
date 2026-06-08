@@ -18,7 +18,4 @@
   <Folder Name="/src/">
     <Project Path="src/Web.Mvc/Web.Mvc.csproj" />
   </Folder>
-  <Project Path="docker-compose.dcproj">
-    <Build />
-  </Project>
 </Solution>

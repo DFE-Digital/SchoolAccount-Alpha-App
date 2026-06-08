@@ -6,4 +6,3 @@ services:
       dockerfile: src/Web.Mvc/Dockerfile
     ports:
       - "5000:8080"
-      - "5001:8081"
